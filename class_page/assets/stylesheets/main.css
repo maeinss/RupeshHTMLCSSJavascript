@@ -1,0 +1,82 @@
+
+     body {font-size: 28px; color: green}
+     h1,
+     h2  {
+         color: rgb(211, 53, 53);
+        }
+     p    {color: red;}
+
+     div{
+         color:black;
+        /* border: 1px solid black;*/
+     }
+     #class1{
+         color:Red
+     }
+     div div{
+         border:1px solid red;
+     }
+
+     #container{
+         margin: 20px ;
+         width: 80% ;
+         /*max-width: width 200px;8?
+     }
+
+     /*reference the id with a pound symbol*/
+     #class{
+         border: 5px dotted orange
+     }
+     .student{
+         width: 600px;
+         height: 100px;
+         border: 1px solid Blue;
+         border-radius: 10px;
+
+     }
+     [special-student]{
+         color: red;
+     }
+     /*pseudo selectors*/
+     a{
+        /* background: orange;
+         color: white;*/
+     }
+     a:visited{
+         color: brown;
+     }
+     a:hover{
+         background: lightpink
+     }
+     #box{
+         padding:10px;
+         /*margin: 50px 0px 50px 0px;*/
+         /*margin :50px 0px;*/
+         margin-top: 50px;
+         margin-left: 100px;
+         /*border: 1px solid black;*/
+         border-top:1px solid black;
+         width: 80%;
+         box-sizing: border-box;
+     }
+
+     .layout-floats{
+         border: none;
+        }
+
+    .floating-img{
+        float:left;
+    }
+    
+    .float-div{
+        width: 200px;
+        height: 50px;
+        float: left;
+        margin: 10px;
+     }
+     .ibl{
+         width: 100px;
+         min-height: 50px;
+         float: left;
+         display:ibl;
+     }

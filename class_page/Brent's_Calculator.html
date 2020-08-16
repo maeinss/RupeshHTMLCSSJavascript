@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Brent's Calculator</title>
+    <style>
+        body, html {
+            height: 100%;
+        }
+        body {
+            /**
+             * I'm using display flex with align-items/justify-content to
+             * easily move the calulator to the center of the page
+             */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 0px;
+            margin: 0px;
+            font-family: Helvetica, monospace,  sans-serif;
+        }
+        #calculator {
+            display: grid;
+            grid-template-columns: 25% 25% 25% 25%;
+            font-weight: 300;
+            font-size: 22px;
+            color: white;
+            background: #333;
+            width: 300px;
+            border-radius: 5px;
+            padding: 1px;
+        }
+        #display {
+            grid-column-start: span 4;
+            font-size: 55px;
+            text-align: right;
+            height: 75px;
+            margin: 0px 20px;
+            color: white;
+            background: transparent;
+            border: 0;
+        }
+        .calc_btn {
+            /**
+             * I'm also using display flex with align items for each button
+             * as a trick to center the text. There are many many ways of doing this
+             * like adjusting padding/margin/height/line-height/text-align,
+             * but this pretty common.
+             */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #777;
+            box-sizing: border-box;
+            height: 70px;
+            padding: 25px;
+            margin: 1px;
+        }
+        .calc_btn--zero {
+            grid-column-start: span 2;
+            border-radius: 0px 0px 0px 4px;
+        }
+        /**
+         * Notice how I'm ONLY using these classes to override what's
+         * different for these buttons. I don't have duplicate properties on these
+         */
+        .calc_btn--special {
+            background: #555;
+        }
+        .calc_btn--operator, .calc_btn--equals {
+            background: orange;
+        }
+        .calc_btn--operator-active {
+            background: #ffcc66;
+        }
+        .calc_btn--equals {
+            border-radius: 0px 0px 4px 0;
+            grid-area: 6 / 4;
+        }
+        .calc_btn--multiply {
+            grid-area: 3 / 4;
+        }
+        .calc_btn--subtract {
+            grid-area: 4 / 4;
+        }
+        .calc_btn--add {
+            grid-area: 5 / 4;
+        }
+    </style>
+</head>
+<body>
+    <div id="calculator" data-number1="" data-number2="" data-operator="" data-last-pressed="">
+        <input type="text" id="display" value="0" />
+        <!--
+            NOTICE how I am using multiple classes on each button.
+            One to style all buttons similarly (calc_btn)
+            One to call out the differently styled buttons (calc_btn--special, and calc_btn--operator)
+            And lastly, I added a class on those that I needed to select with javascript
+            to add the event listeners.
+            Also notice how I'm neatly adding new lines to help 
+            visually separate the groups of buttons.
+        -->
+        <div class="calc_btn calc_btn--special calc_btn--clear">AC</div>
+        <div class="calc_btn calc_btn--special calc_btn--plusmin">&plusmn;</div>
+        <div class="calc_btn calc_btn--special calc_btn--percentage">%</div>
+
+        <div class="calc_btn calc_btn--operator calc_btn--divide" data-operator="DIVIDE">&#247;</div>
+        <div class="calc_btn calc_btn--operator calc_btn--multiply" data-operator="MULTIPLY">*</div>
+        <div class="calc_btn calc_btn--operator calc_btn--subtract" data-operator="SUBTRACT">-</div>
+        <div class="calc_btn calc_btn--operator calc_btn--add" data-operator="ADD">+</div>
+
+        <div class="calc_btn calc_btn--equals">=</div>
+
+        <div class="calc_btn calc_btn--number">7</div>
+        <div class="calc_btn calc_btn--number">8</div>
+        <div class="calc_btn calc_btn--number">9</div>
+        <div class="calc_btn calc_btn--number">4</div>
+        <div class="calc_btn calc_btn--number">5</div>
+        <div class="calc_btn calc_btn--number">6</div>
+        <div class="calc_btn calc_btn--number">1</div>
+        <div class="calc_btn calc_btn--number">2</div>
+        <div class="calc_btn calc_btn--number">3</div>
+        <div class="calc_btn calc_btn--number calc_btn--zero">0</div>
+
+        <div class="calc_btn calc_btn--number">.</div>
+    </div>
+
+<script>
+/**
+ * I'm using an immediately invoked function (IIFE) here so that
+ * my variables are not accessible in the console. This is a trick
+ * to make things more private. If you want to play with the console 
+ * you can always delete this locally and play with the console.
+ * I also am using this "use strict"; expression which enforces some
+ * javascript rules. Both of these, especially the latter is considered
+ * best practice.
+ */
+(function() {
+    "use strict";
+
+    /**
+     * I am clearly assigning all the elements I need to access 
+     * at the top so I can reference the variable rather type out the entire
+     * document.querySelector function. 
+     */
+    var calculator = document.querySelector("#calculator"),
+        display = document.querySelector("#display"),
+        clear = document.querySelector(".calc_btn--clear"),
+        plusMin = document.querySelector(".calc_btn--plusmin"),
+        percentage = document.querySelector(".calc_btn--percentage"),
+        equals = document.querySelector(".calc_btn--equals"),
+        operators = document.querySelectorAll(".calc_btn--operator"),
+        numbers = document.querySelectorAll(".calc_btn--number");
+
+    // HELPER FUNCTIONS
+    var isOperatorEngaged = function() {
+        return !!calculator.dataset.operator;
+    };
+    var disengageOperators = function() {
+        operators.forEach(function(operator) {
+            operator.classList.remove("calc_btn--operator-active");
+        });
+    };
+    var calculate = function() {
+        var number1 = parseFloat(calculator.dataset.number1),
+            number2 = parseFloat(calculator.dataset.number2);
+
+        if (calculator.dataset.operator === "DIVIDE") {
+            display.value = number1 / number2;
+        } else if (calculator.dataset.operator === "MULTIPLY") {
+            display.value = number1 * number2;
+        } else if (calculator.dataset.operator === "SUBTRACT") {
+            display.value = number1 - number2;
+        } else if (calculator.dataset.operator === "ADD") {
+            display.value = number1 + number2;
+        }
+
+        calculator.dataset.number1 = display.value;
+    };
+    /**
+     * Depending on the state of my calculator, I want to know
+     * if I'm updating the first number, or the second number.
+     * This function helps with that. 
+     * This is just the way I thought about this, but there are
+     * many other ways of accomplishing the same thing. I liked
+     * thinking about how there's essentially always a first number,
+     * and a second number that get used along with an operator.
+     * You could also think about it in terms of there being a hidden number
+     * that was previously pressed, and the current display number.
+     */
+    var getStoreLocation = function() {
+        if (!calculator.dataset.number1 || !isOperatorEngaged()) {
+            return "number1";
+        } else {
+            return "number2";
+        }
+    };
+
+    /**
+     * CLICK FUNCITONS
+     * I'm placing all my listener functions together.
+     * I also have a naming convention for listeners to I can tell which
+     * functions are used as listener functions: onSomethingClick
+     */
+    var onOperatorClick = function(event) {
+        if (calculator.dataset.number2 && isOperatorEngaged() && calculator.dataset.lastPressed != "EQUALS") {
+            calculate();
+        }
+
+        disengageOperators();
+        event.currentTarget.classList.add("calc_btn--operator-active");
+
+        calculator.dataset.operator = event.currentTarget.dataset.operator;
+        calculator.dataset.lastPressed = "OPERATOR";
+
+    };
+    var onEqualsClick = function(event) {
+        var number1 = parseFloat(calculator.dataset.number1),
+            number2 = parseFloat(calculator.dataset.number2);
+
+        if (!calculator.dataset.operator) {
+            return;
+        }
+
+        calculate();
+        disengageOperators();
+
+        calculator.dataset.lastPressed = "EQUALS";
+    };
+    var onClearClick = function(event) {
+        disengageOperators();
+
+        display.value = "0";
+        calculator.dataset.number1 = "";
+        calculator.dataset.number2 = "";
+        calculator.dataset.lastPressed = "";
+        calculator.dataset.operator = "";
+    };
+    var onPlusMinusClick = function(event) {
+        var storeLocation = getStoreLocation();
+
+        display.value = parseFloat(display.value) * -1;
+        calculator.dataset[storeLocation] = display.value;
+    };
+    var onPercentageClick = function(event) {
+        var storeLocation = getStoreLocation();
+
+        display.value = parseFloat(display.value) * 0.01;
+        calculator.dataset[storeLocation] = display.value;
+    };
+    var onNumberClick = function(event) {
+        var lastPressed = calculator.dataset.lastPressed;
+        var numPressed = event.currentTarget.innerHTML;
+        var overrideDisplay = lastPressed === "OPERATOR" || !calculator.dataset.number1;
+        var storeLocation = getStoreLocation();
+
+        // restart everything if equals was just pressed
+        if (lastPressed === "EQUALS") {
+            overrideDisplay = true;
+            storeLocation = "number1";
+            calculator.dataset.number1 = "";
+            calculator.dataset.number2 = "";
+        }
+
+        if (overrideDisplay || display.value === "0") {
+            if (numPressed === ".") {
+                numPressed = "0.";
+            }
+
+            display.value = numPressed;
+        } else {
+            display.value += numPressed;
+        }
+
+        calculator.dataset[storeLocation] = display.value;
+        calculator.dataset.lastPressed = "NUMBER";
+    };
+
+    /**
+     * ATTACH LISTENER FUNCTIONS
+     * I didn't need to create function variables. I could have used anonymous
+     * functions and placed them all here, but it gets a bit weird especially
+     * when putting them in the listeners attached within the for loops. 
+     * I find it cleaner this way.
+     */
+    clear.addEventListener("click", onClearClick);
+    plusMin.addEventListener("click", onPlusMinusClick);
+    percentage.addEventListener("click", onPercentageClick);
+    equals.addEventListener("click", onEqualsClick);
+    /**
+     * I could have had a separate class/id on each number/operator
+     * then individually added the listeners, but this saves some space
+     */
+    numbers.forEach(function(numberBtn) {
+        numberBtn.addEventListener("click", onNumberClick);
+    });
+    operators.forEach(function(operator) {
+        operator.addEventListener("click", onOperatorClick);
+    });
+}());
+</script>
+</body>
+</html>
+ ProTip! Use n and p to navigate between commits in a pull request.
+© 2020 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About

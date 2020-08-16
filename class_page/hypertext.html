@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<!-- 
+        The head tag holds the page title, metadata,
+        and can load things like css and javascript files
+    -->
+
+<head>
+    <title>Hello World!</title>
+    <!--CSS goes here-->
+    <!--This is an internal CSS page-->
+    <link rel="stylesheet" type="text/css" href="assets/stylesheets/main.css" />
+</head>
+
+<!--
+        Everything visible on the page will
+        go into the <body> element
+    -->
+
+<body>
+    <div id="container">
+        <!--
+                This is a divider element
+                div elements are block elements
+                (Meaning they create a newline underneath).
+            -->
+        <div>
+            <!-- all text on a page is inline -->
+
+            <!-- 
+                    unordered list 
+                    Some html elements have container elements
+                    and children elements, and most must be present.
+                -->
+            <ul>
+                <!-- list item -->
+                <li>
+                    <!-- a stands for anchor.. it's a link-->
+                    <a href="./index.html">Home</a>
+                </li>
+                <li><a href="http://google.com" target="_blank">About</a></li>
+                <li><a href="mailto:brenton@hey.com">Email me<a></li>
+            </ul>
+
+            <!-- ordered list -->
+            <ol>
+                <li>Apple</li><!-- list item -->
+                <li>Banana</li>
+            </ol>
+        </div>
+
+        <div>
+            <!-- Paragraph element -->
+            <p>
+                Welcome to my website
+            </p>
+
+            Newlines in html
+
+            do not matter.
+            <!--
+                    divs can live inside of other divs!
+                    Just keep your tabs/spacing pretty so
+                    you can see where things belong
+                -->
+            <div>
+                You must use a block element like div or p if you want a break.
+                (there's also the br element, but please avoid this =)
+            </div>
+        </div>
+
+        <!--
+                horizontal rule - self enclosing tag
+                I recommend not using HRs because you can do this in CSS.
+            -->
+        <hr />
+
+        <!-- image, src="source", width, height-->
+        <img width="100"
+            src="https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2017/11/12231413/Labrador-Retriever-MP.jpg"
+            alt="description here" title="hello title" />
+
+        <table>
+            <tr>
+                <th>name1</th>
+                <th>name2</th>
+            </tr>
+            <tr>
+                <td>new</td>
+                <td>old</td>
+            </tr>
+            <tr>
+                <td>new</td>
+                <td>old</td>
+            </tr>
+        </table>
+
+        <div id="class1">Hello this is a <i> coolest class in the world</i>
+            and <strong>strong </strong> world.</div>
+
+        <h1>class</h1>
+
+        <p>welcome to the class</p>
+
+        <h2>Information</h2>
+        <h3>basic information</h3>
+        <h4>extra basic infromation</h4>
+        <div id="class">
+            <div class="student">Rupesh lives in Atlanta</div>
+            <div class="student">But someone doesn't</div>
+            <div special-student class="student">who doesn't</div>
+        </div>
+        <div id="box">
+            contents
+        </div>
+    </div>
+    <h1>Float section</h1>
+    <img width="100"
+            src="https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2017/11/12231413/Labrador-Retriever-MP.jpg"
+            alt="description here" title="hello title" />
+            hEY THERE HOW ARE YOU
+    <div class="layout-floats">
+        <div class="float-div">
+            Hello there
+        </div>
+        <div class="float-div">
+            Hello there
+        </div>
+        <div class="float-div">
+            Hello there
+        </div>
+    </div>
+    
+    <h2>Layouts with inline-block</h2>
+    <div class="lay-ibl">
+        <div class="ibl">
+            Hello there
+        </div>
+        <div class="ibl">
+            Hello there
+        </div>
+        <div class="ibl">
+            Hello there
+    </div>
+        
+</body>
+
+</html>

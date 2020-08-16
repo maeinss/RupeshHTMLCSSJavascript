@@ -1,0 +1,41 @@
+*{
+    box-sizing: border-box;
+}
+.screen {
+    display: flex;
+    width: 800px;
+    height: 120px;
+    justify-content: flex-end;
+    align-items: flex-end;
+    border: 5px solid black;
+    text-align: center;
+    color: white;
+    background-color: lightslategray;
+    font-size: 40px;
+    margin: 10px;
+}
+.container {
+    display: grid;
+    width: 800px;
+    height: 600px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-gap: 1em;
+    margin: 10px;
+  }
+
+.buttons-element {
+    display:flex;
+    border: 5px solid black;
+    align-items: center;
+    justify-content: center;
+    color: #888;
+    font-size: 40px;
+  }
+
+  .red{
+      color: red;
+  }
+  .blue {
+      color: blue;
+  }

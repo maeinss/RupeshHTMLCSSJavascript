@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <!-- 
+        The head tag holds the page title, metadata,
+        and can load things like css and javascript files
+    -->
+
+  <head>
+    <title>Calculator</title>
+    <!-- CSS goes here -->
+    <!-- this is an internal css style tag -->
+    <style>
+      /* This is a css comment */
+      /* body is our first selector */
+      body {
+        font-size: 15px;
+        color: blue;
+      }
+    </style>
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="assets/stylesheets/calculator.css"
+    />
+  </head>
+
+  <body>
+    <div class="bordering">
+      <div class="screen">
+        <p id="output-value"></p>
+        <p id="history-value"></p>
+        <p id="output-temp"></p>
+      </div>
+      <div class="container">
+        <div class="buttons-element operator" id="clear">
+          C
+        </div>
+        <div class="buttons-element operator" id="backspace">
+          del
+        </div>
+        <div class="buttons-element operator" id="%">
+          %
+        </div>
+        <div class="buttons-element operator" id="/">
+          /
+        </div>
+        <div class="buttons-element number" id="7">
+          7
+        </div>
+        <div class="buttons-element number" id="8">
+          8
+        </div>
+        <div class="buttons-element number" id="9">
+          9
+        </div>
+         <div class="buttons-element operator" id="*">
+          *
+        </div>
+        <div class="buttons-element number" id="4">
+          4
+        </div>
+        <div class="buttons-element number" id="5">
+          5
+        </div>
+        <div class="buttons-element number" id="6">
+          6
+        </div>
+        <div class="buttons-element operator" id="-">
+          -
+        </div>
+        <div class="buttons-element number" id="1">
+          1
+        </div>
+        <div class="buttons-element number" id="2">
+          2
+        </div>
+        <div class="buttons-element number" id="3">
+          3
+        </div>
+        <div class="buttons-element  operator" id="+">
+          +
+        </div>
+        <div class="buttons-element operator" id=".">
+          .
+        </div>
+        <div class="buttons-element number" id="0">
+          0
+        </div>
+        <div class="buttons-element operator" id="=">
+          =
+        </div>
+      </div>
+    </div>
+    <script src="assets/scripts/calculator.js"></script>
+  </body>
+</html>

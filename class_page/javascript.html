@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Let's learn javascript</title>
+        <!-- by convention css goes in head -->
+        <!-- <link rel="stylesheet" href="assets/stylesheets/x.css" /> -->
+    </head>
+    <body>
+
+        <div>
+            <!-- these typically go with <form> elements -->
+            <label for="number1">Number 1:</label>
+            <input type="text" id="number1" />
+        </div>
+        <div>
+            <!-- these typically go with <form> elements -->
+            <label for="number2">Number 2:</label>
+            <input type="text" id="number2" />
+        </div>
+        <div>
+            <!-- these typically go with <form> elements -->
+            <label for="output">Output:</label>
+            <input type="text" id="output" />
+        </div>
+
+        <div class="operators">
+            <div class="operator operator__plus">+</div>
+            <div class="operator operator__minus">-</div>
+            <div class="operator operator__times">*</div>
+        </div>
+
+        <style>
+            .operator {
+                width: 200px;
+                text-align: center;
+                padding: 5px;
+                border: 3px solid red;
+                margin: 10px;
+                width: 50px;
+                font-size: 40px;
+            }
+
+            .operator-active {
+                border: 1px solid orange;
+            }
+        </style>
+
+        <!-- <script>
+            // console.log("Hello world!");
+        </script> -->
+
+        <!--
+            by convention, we load JS 
+            down here so it doesn't prevent the page from displaying
+        -->
+        <!-- <script src="assets/scripts/intro1.js"></script> -->
+        <!-- <script src="assets/scripts/intro2.js"></script> -->
+        <script src="assets/scripts/intro3.js"></script>
+
+    </body>
+</html>
